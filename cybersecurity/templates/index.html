@@ -1,0 +1,615 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WebSecurity Toolkit — Web Security Scanner</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2300d5ff'/%3E%3Cstop offset='1' stop-color='%23f4bd50'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 4 54 12v17c0 14-9 24-22 31C19 53 10 43 10 29V12Z' fill='%2307192d' stroke='url(%23g)' stroke-width='4'/%3E%3Cpath d='m20 32 8 8 17-19' fill='none' stroke='url(%23g)' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" role="img"><path class="shield-outline" d="M24 3 42 10v13c0 11-7 18-18 23C13 41 6 34 6 23V10Z"/><path class="circuit-line" d="M14 17h7l4 5h9M15 30h7l4-5h7"/><path class="brand-check" d="m18 24 4 4 9-10"/><circle class="logo-node" cx="14" cy="17" r="2"/><circle class="logo-node" cx="15" cy="30" r="2"/><circle class="logo-node" cx="34" cy="17" r="2"/><circle class="logo-node" cx="33" cy="30" r="2"/></svg></span>
+        <span class="brand-name">WebSecurity <span class="slash">Toolkit</span><small>SCAN • LEARN • PROTECT</small></span>
+    </div>
+
+    <nav>
+        <button class="theme-btn" onclick="toggleTheme()">Theme</button>
+
+        <button class="account-btn" onclick="openTool('account')">
+            MY ACCOUNT
+        </button>
+    </nav>
+</header>
+
+<main id="homePage">
+
+    <section class="hero">
+
+        <div class="hero-glow"></div>
+
+        <div class="hero-content">
+
+            <div class="hero-eyebrow">
+                WEB SECURITY TOOLKIT
+            </div>
+
+            <h1>
+                We help you
+                <span>Stay Protected.</span>
+            </h1>
+
+            <p class="sub">
+                Scan, check, and learn — a lightweight cybersecurity
+                toolkit for coursework, testing, and security awareness.
+            </p>
+
+            <div class="hero-ctas">
+
+                <button
+                    class="btn-primary"
+                    onclick="scrollToTools()"
+                >
+                    Explore Tools
+                </button>
+
+                <button
+                    class="btn-secondary"
+                    onclick="openTool('quiz')"
+                >
+                    Test Your Cybersecurity Skills
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="divider-gradient"></div>
+
+        <div class="hero-marquee" aria-hidden="true">
+            <div class="hero-marquee-track">
+                <span>SCAN • ANALYZE • LEARN • DEFEND</span>
+                <span>SCAN • ANALYZE • LEARN • DEFEND</span>
+                <span>SCAN • ANALYZE • LEARN • DEFEND</span>
+                <span>SCAN • ANALYZE • LEARN • DEFEND</span>
+            </div>
+        </div>
+
+        <div class="trust-row">
+            <span>7 tools in one place</span>
+            <span>|</span>
+            <span>100% free to use</span>
+            <span>|</span>
+            <span>Built for awareness and learning</span>
+        </div>
+
+        
+
+    </section>
+
+
+    <section class="tools" id="tools">
+
+        <div class="section-head">
+
+            <h2>Available Tools</h2>
+
+            <span>7 modules</span>
+
+        </div>
+
+        <input
+            id="searchBox"
+            class="search-box"
+            type="text"
+            placeholder="Search tools..."
+            oninput="filterTools()"
+        >
+
+
+        <div class="grid">
+
+            <div
+                class="card"
+                data-name="vulnerability scanner"
+                onclick="openTool('vuln')"
+            >
+
+                <div class="icon-box">◈</div>
+
+                <h3>Vulnerability Scanner</h3>
+
+                <p>
+                    Scan your local/test website for basic
+                    security configuration issues.
+                </p>
+
+                <div class="card-footer">
+                    Open tool →
+                </div>
+
+            </div>
+
+
+            <div
+                class="card"
+                data-name="password strength checker"
+                onclick="openTool('password')"
+            >
+
+                <div class="icon-box">▣</div>
+
+                <h3>Password Strength Checker</h3>
+
+                <p>
+                    Check password length, complexity,
+                    and common password patterns.
+                </p>
+
+                <div class="card-footer">
+                    Open tool →
+                </div>
+
+            </div>
+
+
+            <div
+                class="card"
+                data-name="security header checker"
+                onclick="openTool('headers')"
+            >
+
+                <div class="icon-box">□</div>
+
+                <h3>Security Header Checker</h3>
+
+                <p>
+                    Check important HTTP security headers
+                    on your local test application.
+                </p>
+
+                <div class="card-footer">
+                    Open tool →
+                </div>
+
+            </div>
+
+
+            <div
+                class="card"
+                data-name="cybersecurity learning hub"
+                onclick="openTool('learn')"
+            >
+
+                <div class="icon-box">◇</div>
+
+                <h3>Cybersecurity Learning Hub</h3>
+
+                <p>
+                    Learn about common cybersecurity threats
+                    and defensive practices.
+                </p>
+
+                <div class="card-footer">
+                    Open tool →
+                </div>
+
+            </div>
+
+
+            <div
+                class="card"
+                data-name="url safety checker"
+                onclick="openTool('url')"
+            >
+
+                <div class="icon-box">↗</div>
+
+                <h3>URL Safety Checker</h3>
+
+                <p>
+                    Analyze a URL for basic suspicious
+                    patterns before opening it.
+                </p>
+
+                <div class="card-footer">
+                    Open tool →
+                </div>
+
+            </div>
+
+
+            <div
+                class="card"
+                data-name="hash identifier"
+                onclick="openTool('hash')"
+            >
+
+                <div class="icon-box">#</div>
+
+                <h3>Hash Identifier</h3>
+
+                <p>
+                    Identify common hash formats such
+                    as MD5, SHA-1 and SHA-256.
+                </p>
+
+                <div class="card-footer">
+                    Open tool →
+                </div>
+
+            </div>
+
+
+            <div
+                class="card wide quiz-card"
+                data-name="cybersecurity quiz"
+                onclick="openTool('quiz')"
+            >
+
+                <div>
+
+                    <div class="quiz-label">
+                        KNOWLEDGE CHECK
+                    </div>
+
+                    <h3>Cybersecurity Quiz</h3>
+
+                    <p>
+                        Test your knowledge of phishing,
+                        passwords, malware, and safe browsing.
+                    </p>
+
+                </div>
+
+                <div class="quiz-score">
+                    Best:
+                    <b id="bestScore">—</b>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<section id="toolPage" class="tool-page">
+
+    <button class="back-btn" onclick="goHome()">
+        ← Back to Home
+    </button>
+
+
+    <div id="vulnTool" class="tool-panel">
+
+        <div class="tool-label">SECURITY ANALYSIS</div>
+
+        <h2>Vulnerability Scanner</h2>
+
+        <p>
+            Pass a public website or a local lab target. The scanner can inspect
+            localhost, loopback, private and reserved addresses as well as normal web hosts.
+        </p>
+
+        <input
+            id="vulnerabilityInput"
+            type="text"
+            placeholder="http://127.0.0.1:5000"
+        >
+
+        <button
+            class="action-btn"
+            onclick="scanVulnerability()"
+        >
+            Start Scan
+        </button>
+
+        <div
+            id="vulnerabilityResult"
+            class="result"
+        ></div>
+
+    </div>
+
+
+    <div id="passwordTool" class="tool-panel">
+
+        <div class="tool-label">PASSWORD SECURITY</div>
+
+        <h2>Password Strength Checker</h2>
+
+        <p>
+            Analyze length, character variety, common patterns, estimated entropy,
+            and an illustrative offline-guessing time. The password stays in your browser.
+        </p>
+
+        <input
+            id="passwordInput"
+            type="password"
+            placeholder="Enter password"
+        >
+
+        <button
+            class="action-btn"
+            onclick="checkPassword()"
+        >
+            Check Password
+        </button>
+
+        <div id="passwordMeter" class="password-meter" style="display:none;">
+            <div id="passwordMeterFill" class="password-meter-fill"></div>
+        </div>
+
+        <div
+            id="passwordResult"
+            class="result"
+        ></div>
+
+    </div>
+
+
+    <div id="headersTool" class="tool-panel">
+
+        <div class="tool-label">HTTP SECURITY</div>
+
+        <h2>Security Header Checker</h2>
+
+        <p>
+            Check your localhost/test application.
+        </p>
+
+        <input
+            id="headerInput"
+            type="text"
+            placeholder="http://127.0.0.1:5000"
+        >
+
+        <button
+            class="action-btn"
+            onclick="checkHeaders()"
+        >
+            Check Headers
+        </button>
+
+        <div
+            id="headerResult"
+            class="result"
+        ></div>
+
+    </div>
+
+
+    <div id="learnTool" class="tool-panel">
+        <div class="tool-label">SECURITY ACADEMY</div>
+        <h2>Cybersecurity Learning Hub</h2>
+        <p>Explore practical security concepts through short lessons, examples, warning signs and defensive checklists.</p>
+
+        <div class="learning-controls">
+            <input id="learningSearch" type="text" placeholder="Search lessons..." oninput="filterLessons()">
+            <select id="learningLevel" onchange="filterLessons()">
+                <option value="all">All levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+        </div>
+
+        <div class="learning-grid" id="learningGrid">
+            <div class="lesson" data-level="beginner" data-search="phishing social engineering email links">
+                <div class="lesson-number">01</div><span class="lesson-level">BEGINNER</span>
+                <h3>Phishing & Social Engineering</h3>
+                <p>Learn how attackers use urgency, impersonation and deceptive links to influence users.</p>
+                <details><summary>Study notes</summary><ul><li>Check the real domain, not just the page branding.</li><li>Be cautious with urgent payment or password requests.</li><li>Use a known bookmark or trusted channel to verify unusual requests.</li></ul></details>
+            </div>
+            <div class="lesson" data-level="beginner" data-search="password authentication passphrase manager">
+                <div class="lesson-number">02</div><span class="lesson-level">BEGINNER</span>
+                <h3>Authentication</h3>
+                <p>Understand passwords, passphrases, password managers and multi-factor authentication.</p>
+                <details><summary>Study notes</summary><ul><li>Prefer long, unique credentials.</li><li>Use MFA for important accounts.</li><li>Never reuse a sensitive password across services.</li></ul></details>
+            </div>
+            <div class="lesson" data-level="intermediate" data-search="web xss cross site scripting encoding">
+                <div class="lesson-number">03</div><span class="lesson-level">INTERMEDIATE</span>
+                <h3>Cross-Site Scripting</h3>
+                <p>Understand why untrusted data must be safely handled before it reaches an HTML or script context.</p>
+                <details><summary>Study notes</summary><ul><li>Context-aware output encoding is important.</li><li>Content Security Policy can add another layer.</li><li>Do not treat client-side validation as the only defense.</li></ul></details>
+            </div>
+            <div class="lesson" data-level="intermediate" data-search="csrf session cookies web authentication">
+                <div class="lesson-number">04</div><span class="lesson-level">INTERMEDIATE</span>
+                <h3>Sessions & CSRF</h3>
+                <p>Learn how session cookies work and why state-changing requests need anti-CSRF protections.</p>
+                <details><summary>Study notes</summary><ul><li>Use secure session-cookie settings.</li><li>Protect state-changing requests with an appropriate CSRF defense.</li><li>Rotate or invalidate sessions when risk requires it.</li></ul></details>
+            </div>
+            <div class="lesson" data-level="intermediate" data-search="headers csp hsts frame security policy">
+                <div class="lesson-number">05</div><span class="lesson-level">INTERMEDIATE</span>
+                <h3>HTTP Security Headers</h3>
+                <p>Explore CSP, HSTS, X-Content-Type-Options, Referrer-Policy and Permissions-Policy.</p>
+                <details><summary>Study notes</summary><ul><li>Headers should match the application's actual requirements.</li><li>HSTS is designed for HTTPS deployments.</li><li>CSP should be tested carefully before enforcement.</li></ul></details>
+            </div>
+            <div class="lesson" data-level="advanced" data-search="ssrf server side request forgery localhost private cloud metadata">
+                <div class="lesson-number">06</div><span class="lesson-level">ADVANCED</span>
+                <h3>SSRF & Internal Networks</h3>
+                <p>Understand why server-side URL fetching can reach destinations the browser cannot directly access.</p>
+                <details><summary>Study notes</summary><ul><li>Validate and normalize destinations.</li><li>Use network egress controls and allowlists where appropriate.</li><li>Pay special attention to loopback, private, link-local and cloud metadata services.</li></ul></details>
+            </div>
+            <div class="lesson" data-level="advanced" data-search="cryptography hashing salt encryption tls">
+                <div class="lesson-number">07</div><span class="lesson-level">ADVANCED</span>
+                <h3>Cryptography Basics</h3>
+                <p>Separate hashing, encryption and encoding, and learn where salts and modern password hashing fit.</p>
+                <details><summary>Study notes</summary><ul><li>Hashing is not reversible encryption.</li><li>Password storage should use a dedicated password-hashing scheme.</li><li>TLS protects data in transit when correctly configured.</li></ul></details>
+            </div>
+            <div class="lesson" data-level="advanced" data-search="logging monitoring incident response detection">
+                <div class="lesson-number">08</div><span class="lesson-level">ADVANCED</span>
+                <h3>Detection & Incident Response</h3>
+                <p>Learn how useful logs, alerts and response procedures turn suspicious activity into actionable evidence.</p>
+                <details><summary>Study notes</summary><ul><li>Record useful security events without collecting unnecessary secrets.</li><li>Correlate events across systems where possible.</li><li>Have a documented containment and recovery process.</li></ul></details>
+            </div>
+        </div>
+        <div id="learningEmpty" class="result">No lessons match your search.</div>
+    </div>
+
+    <div id="urlTool" class="tool-panel">
+
+        <div class="tool-label">URL ANALYSIS</div>
+
+        <h2>URL Safety Checker</h2>
+
+        <p>
+            Check a URL for basic suspicious patterns.
+        </p>
+
+        <input
+            id="urlInput"
+            type="text"
+            placeholder="https://example.com"
+        >
+
+        <button
+            class="action-btn"
+            onclick="checkURL()"
+        >
+            Check URL
+        </button>
+
+        <div
+            id="urlResult"
+            class="result"
+        ></div>
+
+    </div>
+
+
+    <div id="hashTool" class="tool-panel">
+
+        <div class="tool-label">HASH ANALYSIS</div>
+
+        <h2>Hash Identifier</h2>
+
+        <p>
+            Paste a hexadecimal hash value.
+        </p>
+
+        <input
+            id="hashInput"
+            type="text"
+            placeholder="Enter hash"
+        >
+
+        <button
+            class="action-btn"
+            onclick="identifyHash()"
+        >
+            Identify Hash
+        </button>
+
+        <div
+            id="hashResult"
+            class="result"
+        ></div>
+
+    </div>
+
+
+    <div id="quizTool" class="tool-panel">
+
+        <div class="tool-label">KNOWLEDGE CHECK</div>
+
+        <h2>Cybersecurity Student Quiz</h2>
+
+        <div id="quizContainer"></div>
+
+        <button
+            class="action-btn"
+            onclick="submitQuiz()"
+        >
+            Submit Quiz
+        </button>
+
+        <div
+            id="quizResult"
+            class="result"
+        ></div>
+
+    </div>
+
+
+    <div id="accountTool" class="tool-panel">
+        <div class="tool-label">ACCOUNT ACCESS</div>
+        <h2 id="accountHeading">Sign in to WebSecurity Toolkit</h2>
+        <p>Create an account or sign in to unlock all scanners, learning tools, and the cybersecurity quiz.</p>
+
+        <div class="auth-switch" role="group" aria-label="Account action">
+            <button type="button" id="signinTab" class="action-btn" onclick="setAuthMode('login')">Sign In</button>
+            <button type="button" id="signupTab" class="btn-secondary" onclick="setAuthMode('register')">Create Account</button>
+        </div>
+
+        <form id="authForm" onsubmit="submitAuth(event)">
+            <label for="usernameInput">Username</label>
+            <input id="usernameInput" name="username" type="text" minlength="3" maxlength="40" autocomplete="username" placeholder="Choose a username" required>
+            <label for="accountPassword">Password</label>
+            <input id="accountPassword" name="password" type="password" minlength="8" autocomplete="current-password" placeholder="At least 8 characters" required>
+            <button id="authSubmit" class="action-btn" type="submit">Sign In</button>
+        </form>
+        <button id="logoutBtn" class="btn-secondary" type="button" onclick="logoutUser()" style="display:none;">Sign Out</button>
+        <div id="accountResult" class="result" aria-live="polite"></div>
+        <p class="auth-note">Your account is stored by this local project. Never reuse a password from your personal email or other important accounts.</p>
+    </div>
+
+</section>
+
+
+<footer class="site-footer">
+    <div class="footer-brand">
+        <div class="footer-logo">WebSecurity <span>//</span> Toolkit</div>
+        <p>Practical tools for learning and improving web security.</p>
+    </div>
+
+    <div class="footer-links">
+        <a href="#tools" onclick="scrollToTools(); return false;">Tools</a>
+        <a href="#tools" onclick="openTool('learn'); return false;">Learning Hub</a>
+        <a href="#tools" onclick="openTool('quiz'); return false;">Security Quiz</a>
+    </div>
+
+    <div class="footer-status">
+        <span class="status-dot"></span> SYSTEM ONLINE
+        <span id="clock"></span>
+    </div>
+
+    <div class="footer-bottom">
+        <span>© 2026 WS//Toolkit</span>
+        <span>Built for cybersecurity learning</span>
+    </div>
+</footer>
+
+<div class="gsap-cursor" aria-hidden="true"></div>
+<div class="gsap-cursor-dot" aria-hidden="true"></div>
+
+<!-- Animation libraries; they enhance the existing UI without changing its theme. -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+</body>
+</html>
